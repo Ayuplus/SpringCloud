@@ -1,0 +1,9 @@
+1.建Modul
+2.改POM文件
+3.写YNL文件
+4.写主启动类
+5.业务类
+  1)创建实体类
+  2)Mapper类和Mapper映射文件
+  3)Service接口以及实现类
+  4)Controller类
