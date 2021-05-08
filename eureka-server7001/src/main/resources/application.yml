@@ -8,13 +8,8 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://eureka7002.com:7002/eureka/
-spring:
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/zhouhao_sql?useUnicode=true?characterEncoding=utf-8&useSSL=false
-    username: root
-    password: 19990302
-
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  server:
+#    enable-self-preservation: false
+#    #eureka的自我保护机制,默认为true(开启)
+#    eviction-interval-timer-in-ms: 2000
+#    #毫秒为单位,表示两秒未检测到微服务,则清除该服务的注册信息

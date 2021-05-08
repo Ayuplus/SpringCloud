@@ -3,19 +3,17 @@ package com.zhouhao.springcloud.controller;
 import com.zhouhao.springcloud.entities.CommonResult;
 import com.zhouhao.springcloud.entities.Payment;
 import com.zhouhao.springcloud.service.PaymentService;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @RestController
 public class PaymentController {
-    @Resource
+    @Autowired
     private PaymentService service;
 
     @Value("${server.port}")
@@ -24,13 +22,12 @@ public class PaymentController {
     @Resource
     private DiscoveryClient discoveryClient;
 
-
     @PostMapping(value = "/payment/add")
     public CommonResult add(@RequestBody Payment payment){
         int result = service.add(payment);
         System.out.println(result);
         if (result>0){
-            return new CommonResult(200,"插入数据库成功 ,Server Port : "+serverPort,result);
+            return new CommonResult(200,"插入数据库成功,Server Port : "+serverPort,result);
         }else {
             return new CommonResult(444,"插入数据库失败",null);
         }
@@ -47,16 +44,11 @@ public class PaymentController {
         }
     }
 
-    @GetMapping(value = "/payment/discovery")
+    @GetMapping("/payment/discovery")
     public Object discovery(){
-        List<String> services = discoveryClient.getServices();
-        for (String s : services) {
-            System.out.println(s);
-        }
-        List<ServiceInstance> instances = discoveryClient.getInstances("PROVIDER-PAYMENT-SERVER");
-        for (ServiceInstance s:instances) {
-            System.out.println(s.getServiceId()+"\t"+s.getHost()+"\t"+s.getPort()+"\t"+s.getUri());
-        }
+
+
+
         return discoveryClient;
     }
 }

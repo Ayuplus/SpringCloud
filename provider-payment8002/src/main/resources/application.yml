@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8002
 spring:
   application:
     name: provider-payment-server
@@ -10,7 +10,6 @@ spring:
     username: root
     password: 19990302
 
-
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.zhouhao.springcloud.entity
@@ -18,13 +17,10 @@ mybatis:
 eureka:
   client:
     service-url:
-      #将微服务注册到EurekaServe进行管理
       #defaultZone: http://localhost:7001/eureka
       defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
     register-with-eureka: true
     fetch-registry: true
   instance:
-    prefer-ip-address: true   #在EurekaServer暴露ip地址
-    instance-id: payment8001  #在EurekaServer显示的服务名称
-#    lease-renewal-interval-in-seconds: 1      #向EurekaServer发送心跳的间隔
-#    lease-expiration-duration-in-seconds: 2   #EurekaServer保护微服务的时间
+    prefer-ip-address: true
+    instance-id: payment8002
