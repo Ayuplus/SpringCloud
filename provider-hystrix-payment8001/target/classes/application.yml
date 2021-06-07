@@ -1,0 +1,31 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: provider-hystrix-payment-server
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zhouhao_sql?useUnicode=true?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zhouhao.springcloud.entities
+
+eureka:
+  client:
+    service-url:
+      #将微服务注册到EurekaServe进行管理
+      #defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+  instance:
+    prefer-ip-address: true   #在EurekaServer暴露ip地址
+    instance-id: hystrix8001  #在EurekaServer显示的服务名称
+#    lease-renewal-interval-in-seconds: 1      #向EurekaServer发送心跳的间隔
+#    lease-expiration-duration-in-seconds: 2   #EurekaServer保护微服务的时间
